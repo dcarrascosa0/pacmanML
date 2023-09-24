@@ -1,0 +1,41 @@
+{
+    "pallet_percentage": {
+        "lesson_num": 0
+    },
+    "MLAgent": {
+        "checkpoints": [
+            {
+                "steps": 499994,
+                "file_path": "results\\Ultimate Pacman Curriculum 2\\MLAgent\\MLAgent-499994.onnx",
+                "reward": 46.66303536295891,
+                "creation_time": 1695576113.8209836,
+                "auxillary_file_paths": [
+                    "results\\Ultimate Pacman Curriculum 2\\MLAgent\\MLAgent-499994.pt"
+                ]
+            },
+            {
+                "steps": 800259,
+                "file_path": "results\\Ultimate Pacman Curriculum 2\\MLAgent\\MLAgent-800259.onnx",
+                "reward": null,
+                "creation_time": 1695578579.744471,
+                "auxillary_file_paths": [
+                    "results\\Ultimate Pacman Curriculum 2\\MLAgent\\MLAgent-800259.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 800259,
+            "file_path": "results\\Ultimate Pacman Curriculum 2\\MLAgent.onnx",
+            "reward": null,
+            "creation_time": 1695578579.744471,
+            "auxillary_file_paths": [
+                "results\\Ultimate Pacman Curriculum 2\\MLAgent\\MLAgent-800259.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "2.0.0"
+    }
+}
