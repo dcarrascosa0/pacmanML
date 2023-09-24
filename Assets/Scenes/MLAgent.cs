@@ -87,9 +87,9 @@ public class MLAgent : Agent
     private void InitializeComponents()
     {
         behaviorParameters = GetComponent<BehaviorParameters>();
-        lastPosition = transform.position;
+        lastPosition = transform.localPosition;
         navMeshAgent = GetComponent<NavMeshAgent>();
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
         startRotation = transform.rotation;
 
         waypoints = new List<Vector3>();
@@ -104,7 +104,7 @@ public class MLAgent : Agent
             goal.gameObject.SetActive(true);
         }
 
-        transform.position = startPosition;
+        transform.localPosition = startPosition;
 
 
         float currentPalletPercentage = Academy.Instance.EnvironmentParameters.GetWithDefault("pallet_percentage", 1.0f);
@@ -144,8 +144,8 @@ public class MLAgent : Agent
             // Add path to closest pallet using waypoints
             AddPathToObservations(sensor, closestPallet.transform.position, 1);
 
-            sensor.AddObservation(transform.position);
-            float palletDistance = CalculateNavMeshPathLength(transform.position, closestPallet.transform.position);
+            sensor.AddObservation(transform.localPosition);
+            float palletDistance = CalculateNavMeshPathLength(transform.localPosition, closestPallet.transform.localPosition);
             sensor.AddObservation(palletDistance == -1 ? -1 : palletDistance);
         }
         else
@@ -153,7 +153,7 @@ public class MLAgent : Agent
             // Handle case when closestPallet is null, maybe by adding default values
             // This is just an example; you can use other default values as needed.
             sensor.AddObservation(-1);
-            sensor.AddObservation(transform.position);
+            sensor.AddObservation(transform.localPosition);
             sensor.AddObservation(-1);
         }
 
@@ -163,11 +163,19 @@ public class MLAgent : Agent
 
 
 
-    private void AddPathToObservations(VectorSensor sensor, Vector3 targetPosition, int maxWaypoints)
+    private void AddPathToObservations(VectorSensor sensor, Vector3 targetWorldPosition, int maxWaypoints)
     {
         waypoints.Clear();
         path.ClearCorners();
-        waypoints = CalculateNavMeshPath(transform.position, targetPosition);
+        waypoints = CalculateNavMeshPath(transform.position, targetWorldPosition);
+        Transform roomTransform = this.transform.parent;
+
+
+        // Convert world coordinates to local coordinates
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            waypoints[i] = roomTransform.InverseTransformPoint(waypoints[i]);
+        }
 
         // Limit the waypoints to maxWaypoints
         int actualWaypointCount = Mathf.Min(waypoints.Count, maxWaypoints);
@@ -183,7 +191,7 @@ public class MLAgent : Agent
             sensor.AddObservation(Vector3.zero);
         }
     }
-    
+
 
 
     public float CalculateNavMeshPathLength(Vector3 start, Vector3 end)
@@ -202,10 +210,9 @@ public class MLAgent : Agent
     }
 
 
-    public List<Vector3> CalculateNavMeshPath(Vector3 start, Vector3 end)
+    public List<Vector3> CalculateNavMeshPath(Vector3 worldStart, Vector3 worldEnd)
     {
-        
-        if (NavMesh.CalculatePath(start, end, NavMesh.AllAreas, path))
+        if (NavMesh.CalculatePath(worldStart, worldEnd, NavMesh.AllAreas, path))
         {
             waypoints.AddRange(path.corners);
         }
@@ -217,7 +224,7 @@ public class MLAgent : Agent
     {
         return entities
             .Where(e => e.gameObject.activeSelf)
-            .OrderBy(e => CalculateNavMeshPathLength(transform.position, e.transform.position))
+            .OrderBy(e => CalculateNavMeshPathLength(transform.localPosition, e.transform.localPosition))
             .FirstOrDefault();
     }
 
@@ -226,12 +233,12 @@ public class MLAgent : Agent
     public override void OnActionReceived(ActionBuffers actions)
     {
         HandleMovement(actions);
-        Vector3 newPosition = transform.position;
+        Vector3 newPosition = transform.localPosition;
         //UpdatePosition(newPosition);
         //CheckWaypointProximity();
         HandleRewards();
 
-        AddReward(-0.001f);
+        AddReward(-10.0f/MaxStep);
         currentStep++;
         ;
         if (currentStep >= MaxStep || Time.time - lastPalletEatenTime > 30)
@@ -289,16 +296,16 @@ public class MLAgent : Agent
 
         // Ray length adjusted, and debug ray added
         float rayLength = speed * Time.deltaTime;
-        Debug.DrawRay(transform.position, move * rayLength, Color.red);
+        Debug.DrawRay(transform.localPosition, move * rayLength, Color.red);
 
-        if (Physics.Raycast(transform.position, move, rayLength, LayerMask.GetMask("Wall")))
+        if (Physics.Raycast(transform.localPosition, move, rayLength, LayerMask.GetMask("Wall")))
         {
             AddReward(-0.01f);
         }
         else
         {
             transform.localPosition = futurePosition;
-            lastPosition = transform.position;
+            lastPosition = transform.localPosition;
         }
 
         transform.rotation = startRotation;
@@ -308,7 +315,7 @@ public class MLAgent : Agent
     {
         if (waypoints.Count > 0)
         {
-            float distanceToWaypoint = Vector3.Distance(transform.position, waypoints[0]);
+            float distanceToWaypoint = Vector3.Distance(transform.localPosition, waypoints[0]);
 
             if (distanceToWaypoint < 5) // e.g., 0.5f
             {
@@ -330,15 +337,15 @@ public class MLAgent : Agent
     {
         if(closestGoal!=null)
         {
-            UpdateRewardForDistanceToEntity(closestGoal.transform.position, ref lastCalculatedClosestGoalDistance);
+            UpdateRewardForDistanceToEntity(closestGoal.transform.localPosition, ref lastCalculatedClosestGoalDistance);
         }
         //UpdateRewardForDistanceToEntity(closestGhost.transform.position, ref lastCalculatedClosestGhostDistance);
     }
 
     private void UpdateRewardForDistanceToEntity(Vector3 entityPosition, ref float lastCalculatedDistance)
     {
-        float currentDistance = CalculateNavMeshPathLength(transform.position, entityPosition);
-        if (currentDistance != -1 && currentDistance < lastCalculatedDistance)
+        float currentDistance = CalculateNavMeshPathLength(transform.localPosition, entityPosition);
+        if (currentDistance != -1 && currentDistance < lastCalculatedDistance)  
         {
             AddReward(0.001f);
         }
@@ -368,7 +375,7 @@ public class MLAgent : Agent
 
     public bool IsMoving()
     {
-        isMoving = Vector3.Distance(transform.position, lastPosition) > moveThreshold;
+        isMoving = Vector3.Distance(transform.localPosition, lastPosition) > moveThreshold;
         if (!isMoving)
         {
             AddReward(-0.001f); // Penalize for idling
@@ -476,30 +483,21 @@ public class MLAgent : Agent
         }
     }
 
-
-
     void OnDrawGizmos()
     {
-        if (waypoints.Count>0)
+        if (waypoints.Count > 0)
         {
+            Transform roomTransform = this.transform.parent;
             Gizmos.color = Color.red;
 
             for (int i = 0; i < waypoints.Count - 1; i++)
             {
-                Gizmos.DrawLine(waypoints[i], waypoints[i + 1]);
+                Vector3 worldPoint1 = roomTransform.TransformPoint(waypoints[i]);
+                Vector3 worldPoint2 = roomTransform.TransformPoint(waypoints[i + 1]);
+                Gizmos.DrawLine(worldPoint1, worldPoint2);
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
