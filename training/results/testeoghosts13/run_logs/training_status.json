@@ -1,0 +1,44 @@
+{
+    "pallet_percentage": {
+        "lesson_num": 4
+    },
+    "num_ghosts": {
+        "lesson_num": 3
+    },
+    "MLAgent": {
+        "checkpoints": [
+            {
+                "steps": 2499962,
+                "file_path": "results\\testeoghosts13\\MLAgent\\MLAgent-2499962.onnx",
+                "reward": 223.0096119903028,
+                "creation_time": 1696145798.9592662,
+                "auxillary_file_paths": [
+                    "results\\testeoghosts13\\MLAgent\\MLAgent-2499962.pt"
+                ]
+            },
+            {
+                "steps": 2998596,
+                "file_path": "results\\testeoghosts13\\MLAgent\\MLAgent-2998596.onnx",
+                "reward": 205.9887543519338,
+                "creation_time": 1696153435.1075625,
+                "auxillary_file_paths": [
+                    "results\\testeoghosts13\\MLAgent\\MLAgent-2998596.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2998596,
+            "file_path": "results\\testeoghosts13\\MLAgent.onnx",
+            "reward": 205.9887543519338,
+            "creation_time": 1696153435.1075625,
+            "auxillary_file_paths": [
+                "results\\testeoghosts13\\MLAgent\\MLAgent-2998596.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

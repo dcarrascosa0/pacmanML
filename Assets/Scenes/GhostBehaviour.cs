@@ -64,22 +64,23 @@ public class GhostBehaviour : MonoBehaviour
         {
             hasReachedDestination = true;
         }
+        else
+        {
+            hasReachedDestination = false; // Make sure to reset the flag
+        }
 
         switch (currentMode)
         {
             case GhostMode.Chase:
-                hasReachedDestination = false; // Reset flag
                 Chase();
                 break;
             case GhostMode.Scatter:
                 if (hasReachedDestination)
                 {
                     Scatter();
-                    hasReachedDestination = false; // Reset flag
                 }
                 break;
             case GhostMode.Frightened:
-                hasReachedDestination = false; // Reset flag
                 Frightened();
                 break;
         }
@@ -102,28 +103,13 @@ public class GhostBehaviour : MonoBehaviour
 
     public void SwitchMode(GhostMode newMode)
     {
-        CancelInvoke("EndFrightenedMode"); // Cancel any previous calls to end Frightened mode
-        currentMode = newMode;
-        MeshRenderer renderer = GetComponent<MeshRenderer>();
-
-        if (renderer && renderer.material)
-        {
-            if (newMode == GhostMode.Frightened)
-            {
-                renderer.material.color = Color.blue;  // Set to blue
-                Invoke("EndFrightenedMode", frightenedTime);
-            }
-            else
-            {
-                renderer.material = originalMaterial; // Reset to original material
-                modeTime = Time.time;
-            }
-        }
+        currentMode = newMode;     
     }
 
-    private void EndFrightenedMode()
+    public void EndFrightenedMode()
     {
-    
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
+        renderer.material = originalMaterial; // Reset to original material
         SwitchMode(GhostMode.Chase); // Or back to previous mode
         navMeshAgent.speed = 15;
     }
@@ -221,21 +207,33 @@ public class GhostBehaviour : MonoBehaviour
 
     public void EnterFrightenedMode()
     {
+        MeshRenderer renderer = GetComponent<MeshRenderer>();
         SwitchMode(GhostMode.Frightened);
         navMeshAgent.speed = 5;
+        renderer.material.color = Color.blue;  // Set to blue
     }
 
     public void Die()
     {
-        Reset();
-
+        if (navMeshAgent.isOnNavMesh)
+        {
+            // Reset position
+            navMeshAgent.Warp(startPosition);
+            navMeshAgent.isStopped = false;
+        }
     }
 
     public void Reset()
     {
-        // Reset position
-        navMeshAgent.Warp(startPosition);
-        navMeshAgent.isStopped = false;
+        // Reactivate the gameObject in case it was deactivated
+        gameObject.SetActive(true);
+
+        if (navMeshAgent.isOnNavMesh)
+        {
+            // Reset position
+            navMeshAgent.Warp(startPosition);
+            navMeshAgent.isStopped = false;
+        }
 
         // Reset ghost mode and timer
         SwitchMode(GhostMode.Scatter);
@@ -248,10 +246,9 @@ public class GhostBehaviour : MonoBehaviour
             renderer.material = originalMaterial;
         }
         hasReachedDestination = false;
-
-        // Reactivate the gameObject in case it was deactivated
-        gameObject.SetActive(true);
     }
+
+
 
     private Vector3 ClampInRelativeSpace(Vector3 target)
     {
@@ -267,6 +264,10 @@ public class GhostBehaviour : MonoBehaviour
         );
 
         return target;
+    }
+    public Vector3 GetDirection()
+    {
+        return navMeshAgent.velocity.normalized;
     }
 
 

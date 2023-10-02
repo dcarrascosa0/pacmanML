@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Projecte TDR.unity
+    guid: fddb50139ebf3b6489c277edcb7af283
   m_configObjects: {}
