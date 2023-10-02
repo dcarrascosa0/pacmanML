@@ -23100,7 +23100,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609900132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.1, y: 0, z: 0}
+  m_LocalPosition: {x: -12.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75094,18 +75094,14 @@ MonoBehaviour:
   numSteps: 0
   directionX: 0
   directionZ: 0
-  closestGoal: {fileID: 0}
-  closestGhost: {fileID: 0}
   currentLesson: 0
   lessonPalletPercentage:
   - 0.4
   - 0.6
   - 0.8
   - 1
-  closestPallet: {fileID: 0}
-  waypointsPallets: []
-  waypointsGhosts: []
-  waypointsGoal: []
+  waypoints: []
+  optimalTarget: {fileID: 0}
 --- !u!114 &2025326157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75119,7 +75115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 24
+    VectorObservationSize: 13
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2

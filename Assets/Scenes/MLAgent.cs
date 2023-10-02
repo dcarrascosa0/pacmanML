@@ -25,8 +25,6 @@ public class MLAgent : Agent
     private BehaviorParameters behaviorParameters;
     private float moveThreshold = 0.001f;
 
-    public Goal closestGoal;
-    public GhostBehaviour closestGhost;
 
     private float lastCalculatedClosestGoalDistance = float.MaxValue;
     private float lastCalculatedClosestGhostDistance = float.MaxValue;
@@ -52,11 +50,9 @@ public class MLAgent : Agent
     private float previousPalletPercentage = -1.0f;
     private float numPalletsToActivate = 1;
 
-    public PalletsBehaviour closestPallet;
 
-    public List<Vector3> waypointsPallets;
-    public List<Vector3> waypointsGhosts;
-    public List<Vector3> waypointsGoal;
+    public List<Vector3> waypoints;
+    
 
     public NavMeshPath path;
 
@@ -71,6 +67,9 @@ public class MLAgent : Agent
     private float lastGoalEatenTime;
 
     private bool hasEatenGhost;
+    private float maxDistanceToWaypoint = 0f;
+    public GameObject optimalTarget;
+
 
 
 
@@ -108,9 +107,8 @@ public class MLAgent : Agent
         startPosition = transform.localPosition;
         startRotation = transform.rotation;
 
-        waypointsPallets = new List<Vector3>();
-        waypointsGhosts = new List<Vector3>();
-        waypointsGoal= new List<Vector3>();
+        waypoints = new List<Vector3>();
+       
 
 
         path = new NavMeshPath();
@@ -169,41 +167,44 @@ public class MLAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        AddEntityObservations(sensor, palletObjects, waypointsPallets);
-        AddEntityObservations(sensor, ghostObjects, waypointsGhosts);
-        AddEntityObservations(sensor, goalObjects, waypointsGoal);
+        optimalTarget = FindOptimalPath(transform.position);
+        Transform roomTransform = this.transform.parent;
+        waypoints.Clear();
+        float maxTimeBetweenPallets = 30f;
 
-        sensor.AddObservation(canAttack);
-        sensor.AddObservation(numPalletsToActivate - pelletsEaten);
-        sensor.AddObservation(Time.time - lastPalletEatenTime);
-        sensor.AddObservation(new Vector2(transform.localPosition.x, transform.localPosition.z));  // Y-axis ignored
-        sensor.AddObservation(new Vector2(rb.velocity.x, rb.velocity.z).normalized);  // Y-axis ignored
-    }
-
-    private void AddEntityObservations(VectorSensor sensor, List<GameObject> entityList, List<Vector3> waypoints)
-    {
-        MonoBehaviour closestEntityBehaviour = GetClosestEntity<MonoBehaviour>(
-            entityList.Select(go => go.GetComponent<MonoBehaviour>()).ToList()
-        );
-
-        if (closestEntityBehaviour != null)
+        if (optimalTarget != null)
         {
-            float distance = AddPathToObservations(sensor, closestEntityBehaviour.transform.position, 1, waypoints);
-            sensor.AddObservation(distance);
+            NavMeshPath path = new NavMeshPath();
+            NavMesh.CalculatePath(transform.position, optimalTarget.transform.position, NavMesh.AllAreas, path);
 
-            if (closestEntityBehaviour is GhostBehaviour closestGhost)
+            waypoints = path.corners.Select(point => roomTransform.InverseTransformPoint(point)).ToList();
+
+            if (waypoints.Count > 1)
             {
-                Vector2 ghostDirection = new Vector2(closestGhost.GetDirection().x, closestGhost.GetDirection().z).normalized;  // Y-axis ignored
-                sensor.AddObservation(ghostDirection);
+                
+                Vector3 directionToFirstWaypoint = waypoints[1] - transform.localPosition;
+
+                float distanceToWaypoint = directionToFirstWaypoint.magnitude;
+                maxDistanceToWaypoint = Mathf.Max(maxDistanceToWaypoint, distanceToWaypoint);
+
+                // Normalize
+                sensor.AddObservation(directionToFirstWaypoint.normalized);
+                sensor.AddObservation(waypoints[1] / maxDistanceToWaypoint);
             }
         }
         else
         {
-            sensor.AddObservation(-1f);
-            sensor.AddObservation(-1f);
-            sensor.AddObservation(-1f);
+            sensor.AddObservation(Vector3.zero);
+            sensor.AddObservation(Vector3.zero);
         }
+
+        sensor.AddObservation(canAttack ? 1f : 0f);
+        sensor.AddObservation((float)(numPalletsToActivate - pelletsEaten) / numPalletsToActivate);
+        sensor.AddObservation((Time.time - lastPalletEatenTime) / maxTimeBetweenPallets);
+        sensor.AddObservation(new Vector2(transform.localPosition.x, transform.localPosition.z) / maxDistanceToWaypoint);
+        sensor.AddObservation(new Vector2(rb.velocity.x, rb.velocity.z).normalized);
     }
+
 
     public float GetPathLength(NavMeshPath path)
     {
@@ -215,15 +216,15 @@ public class MLAgent : Agent
         return length;
     }
 
-    public GameObject FindOptimalPath(Vector3 startPos, bool canAttack)
+    public GameObject FindOptimalPath(Vector3 startPos)
     {
         NavMeshPath path = new NavMeshPath();
         float bestCost = Mathf.Infinity;
         GameObject optimalTarget = null;
 
         List<GameObject> allTargets = new List<GameObject>();
-        allTargets.AddRange(palletObjects);
-        allTargets.AddRange(goalObjects);  // Assuming goalObjects are Powerballs
+        allTargets.AddRange(palletObjects.Where(x => x.activeInHierarchy));
+        allTargets.AddRange(goalObjects.Where(x => x.activeInHierarchy));
 
         foreach (GameObject target in allTargets)
         {
@@ -255,7 +256,7 @@ public class MLAgent : Agent
                         if (NavMesh.CalculatePath(startPos, ghost.transform.position, NavMesh.AllAreas, path))
                         {
                             float distanceToGhost = GetPathLength(path);
-                            if (distanceToGhost < 3f)
+                            if (distanceToGhost < 6f)
                             {
                                 penalty += 100f;  // Add penalty
                             }
@@ -280,7 +281,7 @@ public class MLAgent : Agent
             {
                 if (NavMesh.CalculatePath(startPos, target.transform.position, NavMesh.AllAreas, path))
                 {
-                    float cost = GetPathLength(path) * 0.2f;  // Lower cost, prioritized
+                    float cost = GetPathLength(path) * 0.05f;  // Lower cost, prioritized
                     if (cost < bestCost)
                     {
                         bestCost = cost;
@@ -315,119 +316,16 @@ public class MLAgent : Agent
         return distance <= threshold;
     }
 
-
-    private float AddPathToObservations(VectorSensor sensor, Vector3 targetWorldPosition, int maxWaypoints, List<Vector3> waypoints)
-    {
-        waypoints.Clear();
-        path.ClearCorners();
-        waypoints = CalculateNavMeshPath(transform.position, targetWorldPosition, waypoints);
-        Transform roomTransform = this.transform.parent;
-
-        for (int i = 0; i < waypoints.Count; i++)
-        {
-            waypoints[i] = roomTransform.InverseTransformPoint(waypoints[i]);
-        }
-
-        int actualWaypointCount = Mathf.Min(waypoints.Count, maxWaypoints);
-        float totalDistance = 0f;
-
-        for (int i = 0; i < actualWaypointCount; i++)
-        {
-            Vector2 directionToWaypoint = new Vector2((waypoints[i].x - transform.localPosition.x), (waypoints[i].z - transform.localPosition.z)).normalized;  // Y-axis ignored
-            totalDistance += (new Vector2(waypoints[i].x, waypoints[i].z) - new Vector2(transform.localPosition.x, transform.localPosition.z)).magnitude;
-            sensor.AddObservation(directionToWaypoint);
-        }
-
-        for (int i = actualWaypointCount; i < maxWaypoints; i++)
-        {
-            sensor.AddObservation(Vector2.zero);
-        }
-
-        return totalDistance;
-    }
-
-
-
-
-
-    public float CalculateNavMeshPathLength(Vector3 start, Vector3 end)
-    {
-        NavMeshPath currentPath = new NavMeshPath();
-        if (NavMesh.CalculatePath(start, end, NavMesh.AllAreas, currentPath))
-        {
-            float length = 0;
-            for (int i = 0; i < currentPath.corners.Length - 1; i++)
-            {
-                length += Vector3.Distance(currentPath.corners[i], currentPath.corners[i + 1]);
-            }
-            return length;
-        }
-        return -1;  // Changed from float.MaxValue to -1
-    }
-
-    public float CalculateLengthClosestEntity(Vector3 start, List<Vector3> waypoints)
-    {
-        float totalDistance = 0f;
-
-        // Ensure there are at least 2 waypoints to calculate distance
-        if (waypoints.Count < 1)
-            return totalDistance;
-
-        // Calculate the distance between consecutive waypoints
-        for (int i = 0; i < waypoints.Count; i++)
-        {
-            if (i == 0)
-            {
-                // Add the distance from the start to the first waypoint
-                totalDistance += Vector3.Distance(start, waypoints[i]);
-            }
-            else
-            {
-                // Add the distance between consecutive waypoints
-                totalDistance += Vector3.Distance(waypoints[i - 1], waypoints[i]);
-            }
-        }
-
-        return totalDistance;
-    }
-
-
-    public List<Vector3> CalculateNavMeshPath(Vector3 worldStart, Vector3 worldEnd, List<Vector3> waypoints)
-    {
-        if (NavMesh.CalculatePath(worldStart, worldEnd, NavMesh.AllAreas, path))
-        {
-            waypoints.AddRange(path.corners);
-        }
-        return waypoints;
-    }
-
-
-    private T GetClosestEntity<T>(List<T> entities) where T : MonoBehaviour
-    {
-        return entities
-            .Where(e => e != null && e.gameObject.activeSelf)
-            .OrderBy(e => CalculateNavMeshPathLength(transform.position, e.transform.position))
-            .FirstOrDefault();
-    }
-
-
-
-
-
     public override void OnActionReceived(ActionBuffers actions)
     {
         HandleMovement(actions);
         Vector3 newPosition = transform.localPosition;
-        //UpdatePosition(newPosition);
-        CheckWaypointProximity();
 
         AddReward(-1.0f/MaxStep);
         currentStep++;
         
         if (currentStep >= MaxStep || Time.time - lastPalletEatenTime > 30)
         {
-            float penalty = (numPalletsToActivate - pelletsEaten) * -0.1f; // Adjust the penalty factor as needed
-            AddReward(penalty);
             Debug.Log("Ending episode due to max steps reached or 30 seconds without eating a pallet.");
             EndEpisode();
         }
@@ -443,50 +341,12 @@ public class MLAgent : Agent
 
         // Calculate the future velocity
         Vector3 futureVelocity = move * speed;
+        futureVelocity.y = 0.0f;
 
         // Apply movement as velocity change
         rb.AddForce(futureVelocity - rb.velocity, ForceMode.VelocityChange);
 
         transform.rotation = startRotation;
-    }
-
-    private void CheckWaypointProximity()
-    {
-        if (waypointsPallets.Count > 0)
-        {
-            float distanceToPallet = CalculateLengthClosestEntity(transform.localPosition, waypointsPallets);
-            UpdateReward(distanceToPallet, ref previousDistancePallet, 0.00001f, -0.00001f);
-        }
-
-        if (waypointsGoal.Count > 0)
-        {
-            float distanceToGoal = CalculateLengthClosestEntity(transform.localPosition, waypointsGoal);
-            UpdateReward(distanceToGoal, ref previousDistanceGoal, 0.001f, -0.001f);  // Assume it's better to be close to the goal
-        }
-
-        if (waypointsGhosts.Count > 0)
-        {
-            float distanceToGhost = CalculateLengthClosestEntity(transform.localPosition, waypointsGhosts);
-            if(!canAttack)
-                UpdateReward(distanceToGhost, ref previousDistanceGhost, -0.1f, 0.1f);  // Assume it's bad to be close to the ghost
-            else
-                UpdateReward(distanceToGhost, ref previousDistanceGhost, 0.1f, -0.1f);  // Assume it's good to be close to the ghost
-
-        }
-    }
-
-    private void UpdateReward(float currentDistance, ref float previousDistance, float positiveReward, float negativeReward)
-    {
-        if (currentDistance < previousDistance)
-        {
-            AddReward(positiveReward);
-        }
-        else
-        {
-            AddReward(negativeReward);
-        }
-
-        previousDistance = currentDistance;
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -505,8 +365,6 @@ public class MLAgent : Agent
         manualDirection = new Vector3(horizontalInput, 0, verticalInput).normalized;
     }
 
-  
-
 
     private bool IsUsingHeuristic()
     {
@@ -517,7 +375,7 @@ public class MLAgent : Agent
     {
         if (!hasEatenGhost)
         {
-            AddReward(-0.1f);  // Negative reward for not eating a ghost within the activation time
+            AddReward(-0.5f);  // Negative reward for not eating a ghost within the activation time
         }
         canAttack = false;
         hasEatenGhost = false;
@@ -526,14 +384,13 @@ public class MLAgent : Agent
 
         foreach (var ghostBehaviour in ghostBehaviours)
         {
-            ghostBehaviour.EnterFrightenedMode();
+            ghostBehaviour.EndFrightenedMode();
         }
     }
     public bool IsMoving()
     {
         return GetComponent<Rigidbody>().velocity != Vector3.zero;
     }
-
 
 
 
@@ -638,13 +495,7 @@ public class MLAgent : Agent
         Transform roomTransform = this.transform.parent;
 
         // Draw Pallets
-        DrawWaypointsGizmos(waypointsPallets, Color.red, roomTransform);
-
-        // Draw Goal
-        DrawWaypointsGizmos(waypointsGoal, Color.green, roomTransform);
-
-        // Draw Ghost
-        DrawWaypointsGizmos(waypointsGhosts, Color.blue, roomTransform);
+        DrawWaypointsGizmos(waypoints, Color.red, roomTransform);
     }
 
     void DrawWaypointsGizmos(List<Vector3> waypoints, Color color, Transform roomTransform)
