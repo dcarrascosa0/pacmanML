@@ -6201,6 +6201,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d230a26d6e2090846a8179dbbfcb1c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &164310771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 164310772}
+  m_Layer: 0
+  m_Name: Rooms
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &164310772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164310771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -77.734245, y: 261.555, z: -180.42316}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 609900133}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &164410484
 GameObject:
   m_ObjectHideFlags: 0
@@ -12596,7 +12628,7 @@ GameObject:
   - component: {fileID: 356622481}
   - component: {fileID: 356622480}
   - component: {fileID: 356622485}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Inky
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -12735,7 +12767,9 @@ MonoBehaviour:
   blinkyTransform: {fileID: 2034709079}
   scatterWaypoints: []
   frightenedTime: 5
+  currentMode: 1
   originalMaterial: {fileID: 0}
+  scatterTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &358766057
 GameObject:
   m_ObjectHideFlags: 0
@@ -23099,8 +23133,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609900132}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.6, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 65.13425, y: -261.555, z: 180.42316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23111,8 +23145,9 @@ Transform:
   - {fileID: 2009738917}
   - {fileID: 828794267}
   - {fileID: 42949893}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  - {fileID: 1529448643}
+  m_Father: {fileID: 164310772}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &613192426
 GameObject:
@@ -36000,14 +36035,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.5644773, y: -0, z: -0, w: 0.8254486}
-  m_LocalPosition: {x: -74.8, y: 99.8, z: -72}
+  m_LocalRotation: {x: 0.7070959, y: -0.003936412, z: 0.003936411, w: 0.7070959}
+  m_LocalPosition: {x: -79.3, y: 122, z: -35.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 68.732, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0.638}
 --- !u!1 &963228752
 GameObject:
   m_ObjectHideFlags: 0
@@ -41303,7 +41338,7 @@ GameObject:
   - component: {fileID: 1089426694}
   - component: {fileID: 1089426693}
   - component: {fileID: 1089426698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Clyde
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -41442,7 +41477,9 @@ MonoBehaviour:
   blinkyTransform: {fileID: 2034709079}
   scatterWaypoints: []
   frightenedTime: 5
+  currentMode: 1
   originalMaterial: {fileID: 0}
+  scatterTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &1091258939
 GameObject:
   m_ObjectHideFlags: 0
@@ -52651,6 +52688,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d230a26d6e2090846a8179dbbfcb1c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1412848660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1412848661}
+  - component: {fileID: 1412848662}
+  m_Layer: 0
+  m_Name: LessonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1412848661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412848660}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -83.75297, y: 99.984024, z: -80.43912}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1412848662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412848660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4968816269308943bda69ed5d5bb3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PalletLessons: []
+  GhostLessons: 
+  CombinedLessons: []
+  CurrentPalletIndex: 0
+  CurrentGhostIndex: 0
+  CurrentCombinedIndex: 0
 --- !u!1 &1413118192
 GameObject:
   m_ObjectHideFlags: 0
@@ -56831,6 +56918,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d230a26d6e2090846a8179dbbfcb1c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1529448642
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1529448643}
+  - component: {fileID: 1529448644}
+  m_Layer: 0
+  m_Name: EnemyZone
+  m_TagString: EnemyZone
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1529448643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529448642}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -74.64, y: 13.12, z: -31.07}
+  m_LocalScale: {x: 8.560321, y: 9.458906, z: 26.47}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 609900133}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1529448644
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529448642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1540488020
 GameObject:
   m_ObjectHideFlags: 0
@@ -67516,7 +67648,7 @@ GameObject:
   - component: {fileID: 1868413625}
   - component: {fileID: 1868413624}
   - component: {fileID: 1868413629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PInky
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -67655,7 +67787,9 @@ MonoBehaviour:
   blinkyTransform: {fileID: 2034709079}
   scatterWaypoints: []
   frightenedTime: 5
+  currentMode: 1
   originalMaterial: {fileID: 0}
+  scatterTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &1869491317
 GameObject:
   m_ObjectHideFlags: 0
@@ -75086,7 +75220,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  MaxStep: 10000
   speed: 30
   winMaterial: {fileID: 2100000, guid: 111a62e9e980a7f4697a60fccad3d6b1, type: 2}
   loseMaterial: {fileID: 2100000, guid: 7a493a3000daf7541bbb09edbd3cbe84, type: 2}
@@ -75115,7 +75249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 15
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -75601,7 +75735,7 @@ GameObject:
   - component: {fileID: 2034709082}
   - component: {fileID: 2034709081}
   - component: {fileID: 2034709086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Blinky
   m_TagString: Ghost
   m_Icon: {fileID: 0}
@@ -75740,7 +75874,9 @@ MonoBehaviour:
   blinkyTransform: {fileID: 2034709079}
   scatterWaypoints: []
   frightenedTime: 5
+  currentMode: 1
   originalMaterial: {fileID: 0}
+  scatterTarget: {x: 0, y: 0, z: 0}
 --- !u!1 &2034924451
 GameObject:
   m_ObjectHideFlags: 0

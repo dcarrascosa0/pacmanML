@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Policies;
 using UnityEngine.AI;
 using System.Linq;
-
+using System.Runtime.CompilerServices;
 
 public class MLAgent : Agent
 {
@@ -49,6 +49,8 @@ public class MLAgent : Agent
     public float[] lessonPalletPercentage = new float[] { 0, 1f, 0, 2f, 0.4f, 0.6f, 0.8f, 1.0f };
     private float previousPalletPercentage = -1.0f;
     private float numPalletsToActivate = 1;
+    private float numGhostsToActivate = 0;
+
 
 
     public List<Vector3> waypoints;
@@ -69,10 +71,12 @@ public class MLAgent : Agent
     private bool hasEatenGhost;
     private float maxDistanceToWaypoint = 0f;
     public GameObject optimalTarget;
-
-
-
-
+    private float previousPathLength = float.MaxValue;
+    private Vector3 lastRewardedWaypoint;
+    Vector2 directionToFirstWaypoint;
+    float distanceToWaypoint;
+    private float countdownTimer = 0f;
+    private LessonManager lessonManager;
 
 
 
@@ -96,6 +100,8 @@ public class MLAgent : Agent
         palletObjects = new List<GameObject>(Array.ConvertAll(palletsParent.GetComponentsInChildren<PalletsBehaviour>(), item => item.gameObject));
 
         numPallets = palletsParent.childCount;
+
+        lessonManager = FindObjectOfType<LessonManager>();
     }
 
 
@@ -116,21 +122,22 @@ public class MLAgent : Agent
 
     public override void OnEpisodeBegin()
     {
+        
         // Your existing code
         Transform roomTransform = this.transform.parent;
         foreach (GameObject goal in goalObjects)
         {
             goal.gameObject.SetActive(true);
         }
-        var envParams = Academy.Instance.EnvironmentParameters;
 
-        // Get the current number of ghosts to be active
-        float currentNumGhosts = (int)envParams.GetWithDefault("num_ghosts", 4);
+        // Use LessonManager to get the current combined lesson
+        LessonManager.LessonData lessonData = lessonManager.GetCurrentCombinedValue();
+        numGhostsToActivate = lessonData.ghostValue;
 
         // Reset and activate only 'currentNumGhosts' ghosts
         for (int i = 0; i < ghostObjects.Count; i++)
         {
-            if (i < currentNumGhosts)
+            if (i < numGhostsToActivate)
             {
                 ghostObjects[i].gameObject.SetActive(true);
                 ghostObjects[i].GetComponent<GhostBehaviour>().Reset();
@@ -139,21 +146,11 @@ public class MLAgent : Agent
             {
                 ghostObjects[i].gameObject.SetActive(false);
             }
-
         }
 
         transform.localPosition = startPosition;
 
-        // Rest of your existing code
-        float currentPalletPercentage = envParams.GetWithDefault("pallet_percentage", 1.0f);
-
-        if (previousPalletPercentage != currentPalletPercentage)
-        {
-            Debug.Log($"Current Pallet Percentage: {currentPalletPercentage}");
-            previousPalletPercentage = currentPalletPercentage;
-        }
-
-        numPalletsToActivate = (float)Mathf.RoundToInt(numPallets * currentPalletPercentage);
+        numPalletsToActivate = (float)Mathf.RoundToInt(numPallets * lessonData.palletValue);
         ActivatePallets(numPalletsToActivate);
 
         lastPalletEatenTime = Time.time;
@@ -161,11 +158,13 @@ public class MLAgent : Agent
         currentStep = 0;
         positionHistory.Clear();
         hasEatenGhost = false;
-    }
+
+
+}
 
 
 
-    public override void CollectObservations(VectorSensor sensor)
+public override void CollectObservations(VectorSensor sensor)
     {
         optimalTarget = FindOptimalPath(transform.position);
         Transform roomTransform = this.transform.parent;
@@ -181,27 +180,45 @@ public class MLAgent : Agent
 
             if (waypoints.Count > 1)
             {
-                
-                Vector3 directionToFirstWaypoint = waypoints[1] - transform.localPosition;
+                directionToFirstWaypoint = new Vector2(waypoints[1].x, waypoints[1].z) - new Vector2(transform.localPosition.x, transform.localPosition.z);
 
-                float distanceToWaypoint = directionToFirstWaypoint.magnitude;
+                distanceToWaypoint = directionToFirstWaypoint.magnitude;
                 maxDistanceToWaypoint = Mathf.Max(maxDistanceToWaypoint, distanceToWaypoint);
 
                 // Normalize
                 sensor.AddObservation(directionToFirstWaypoint.normalized);
-                sensor.AddObservation(waypoints[1] / maxDistanceToWaypoint);
+                sensor.AddObservation( GetPathLength(path));
             }
         }
         else
         {
-            sensor.AddObservation(Vector3.zero);
-            sensor.AddObservation(Vector3.zero);
+            sensor.AddObservation(Vector2.zero);
+            sensor.AddObservation(0.0f);
         }
 
+        if(ghostObjects.Count > 0)
+        {
+            foreach (var ghostObject in ghostObjects){
+                if (ghostObject.activeInHierarchy)
+                {
+                    NavMeshPath pathGhost = new NavMeshPath();
+                    NavMesh.CalculatePath(transform.position, ghostObject.transform.position, NavMesh.AllAreas, pathGhost);
+                    float pathLength = GetPathLength(pathGhost);
+                    sensor.AddObservation(pathLength);
+                }
+                else
+                {
+                    sensor.AddObservation(-1f);
+                }
+            }
+
+        }
+        
+        sensor.AddObservation(countdownTimer);
         sensor.AddObservation(canAttack ? 1f : 0f);
         sensor.AddObservation((float)(numPalletsToActivate - pelletsEaten) / numPalletsToActivate);
         sensor.AddObservation((Time.time - lastPalletEatenTime) / maxTimeBetweenPallets);
-        sensor.AddObservation(new Vector2(transform.localPosition.x, transform.localPosition.z) / maxDistanceToWaypoint);
+        sensor.AddObservation(new Vector2(transform.localPosition.x, transform.localPosition.z));
         sensor.AddObservation(new Vector2(rb.velocity.x, rb.velocity.z).normalized);
     }
 
@@ -222,50 +239,76 @@ public class MLAgent : Agent
         float bestCost = Mathf.Infinity;
         GameObject optimalTarget = null;
 
-        List<GameObject> allTargets = new List<GameObject>();
-        allTargets.AddRange(palletObjects.Where(x => x.activeInHierarchy));
-        allTargets.AddRange(goalObjects.Where(x => x.activeInHierarchy));
+        // Step 1: Get nearest targets
+        var nearestPallets = palletObjects
+            .Where(x => x.activeInHierarchy)
+            .OrderBy(x => Vector3.Distance(startPos, x.transform.position))
+            .Take(10);
 
-        foreach (GameObject target in allTargets)
+        var nearestGoals = goalObjects
+            .Where(x => x.activeInHierarchy)
+            .OrderBy(x => Vector3.Distance(startPos, x.transform.position))
+            .Take(1);
+
+        var nearestGhosts = ghostObjects
+            .Where(x => x.activeInHierarchy)
+            .OrderBy(x => Vector3.Distance(startPos, x.transform.position))
+            .Take(4);
+
+        List<GameObject> nearestTargets = new List<GameObject>(nearestPallets);
+        nearestTargets.AddRange(nearestGoals);
+        nearestTargets.AddRange(nearestGhosts);
+
+        // Step 2: Calculate path cost and penalties for each target
+        foreach (GameObject target in nearestTargets)
         {
             if (NavMesh.CalculatePath(startPos, target.transform.position, NavMesh.AllAreas, path))
             {
                 float baseCost = GetPathLength(path);
 
-                // Decrease cost if target is a Powerball
-                if (goalObjects.Contains(target))
-                {
-                    baseCost *= 0.5f;  // Cut the cost in half, for example
-                }
-
                 float penalty = 0;
-                // Adding a penalty if there's a ghost in the way
                 foreach (GameObject ghost in ghostObjects)
                 {
                     if (IsGhostInPath(path, ghost.transform.position))
                     {
-                        penalty += 1000;  // Arbitrary high penalty
+                        penalty += 1000;
                     }
                 }
 
-                // Additional penalty for being near a ghost if Pacman doesn't have a power ball
                 if (!canAttack)
                 {
+                    float closestGhostDist = float.MaxValue;
+
                     foreach (GameObject ghost in ghostObjects)
                     {
-                        if (NavMesh.CalculatePath(startPos, ghost.transform.position, NavMesh.AllAreas, path))
-                        {
-                            float distanceToGhost = GetPathLength(path);
-                            if (distanceToGhost < 6f)
-                            {
-                                penalty += 100f;  // Add penalty
-                            }
-                        }
+                        float dist = Vector3.Distance(target.transform.position, ghost.transform.position);
+                        closestGhostDist = Mathf.Min(closestGhostDist, dist);
                     }
+
+                    // Use inverse relationship for penalty: farther distance, smaller penalty; closer distance, greater penalty.
+                    if (closestGhostDist != float.MaxValue)
+                    {
+                        penalty += 30 / (closestGhostDist + 1);  // +1 to avoid division by zero
+                    }
+
+                    // Give priority to the goal when not in attack mode and a ghost is nearby
+                    if (closestGhostDist < 4f && goalObjects.Contains(target))
+                    {
+                        baseCost *= 0.2f;
+                    }
+                }
+
+                if (goalObjects.Contains(target))
+                {
+                    baseCost *= 0.5f;
+                }
+
+                if (ghostObjects.Contains(target))
+                {
+                    baseCost *= canAttack ? 0.1f : 5f;
                 }
 
                 float totalCost = baseCost + penalty;
-
                 if (totalCost < bestCost)
                 {
                     bestCost = totalCost;
@@ -274,28 +317,11 @@ public class MLAgent : Agent
             }
         }
 
-        // If Pacman has a power ball, ghosts are targets, not obstacles
-        if (canAttack)
-        {
-            foreach (GameObject target in ghostObjects)
-            {
-                if (NavMesh.CalculatePath(startPos, target.transform.position, NavMesh.AllAreas, path))
-                {
-                    float cost = GetPathLength(path) * 0.05f;  // Lower cost, prioritized
-                    if (cost < bestCost)
-                    {
-                        bestCost = cost;
-                        optimalTarget = target;
-                    }
-                }
-            }
-        }
-
         return optimalTarget;
     }
 
 
-    public bool IsGhostInPath(NavMeshPath path, Vector3 ghostPosition)
+        public bool IsGhostInPath(NavMeshPath path, Vector3 ghostPosition)
     {
         for (int i = 1; i < path.corners.Length; ++i)
         {
@@ -318,17 +344,69 @@ public class MLAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        if (countdownTimer > 0)
+        {
+            countdownTimer -= Time.deltaTime;
+        }
+
         HandleMovement(actions);
         Vector3 newPosition = transform.localPosition;
 
-        AddReward(-1.0f/MaxStep);
+        AddReward(-0.3f/(float)MaxStep);
         currentStep++;
         
         if (currentStep >= MaxStep || Time.time - lastPalletEatenTime > 30)
         {
-            Debug.Log("Ending episode due to max steps reached or 30 seconds without eating a pallet.");
+            AddReward((-(float)(numPalletsToActivate - pelletsEaten) / (float)numPalletsToActivate));
             EndEpisode();
         }
+
+        RewardForCosineSimilarity();
+        RewardForDistanceDecrease();
+        RewardForReachingWaypoint();
+    }
+
+
+    private void RewardForReachingWaypoint()
+    {
+        if (waypoints.Count > 1)
+        {
+            Vector3 currentWaypoint = new Vector3(waypoints[1].x, waypoints[1].y, waypoints[1].z);
+            if (Vector3.Distance(transform.localPosition, currentWaypoint) < 0.1f)
+            {
+                if (currentWaypoint != lastRewardedWaypoint)
+                {
+                    AddReward(0.05f);  // Large positive reward
+                    lastRewardedWaypoint = currentWaypoint;
+                }
+            }
+        }
+    }
+
+    private void RewardForCosineSimilarity()
+    {
+        if (directionToFirstWaypoint!=null)
+        {
+            Vector2 actualDirection = new Vector2(rb.velocity.x, rb.velocity.z).normalized;
+            float rewardCosine = Vector2.Dot(actualDirection, directionToFirstWaypoint.normalized) * 3f;
+            AddReward(rewardCosine / (float)MaxStep);
+        }
+    }
+
+    private void RewardForDistanceDecrease()
+    {
+        
+
+        if (distanceToWaypoint < previousPathLength)
+        {
+            AddReward(0.2f / (float)MaxStep);  // Positive reward for getting closer
+        }
+        else
+        {
+            AddReward(-0.2f / (float)MaxStep); // Negative reward for getting farther away
+        }
+
+        previousPathLength = distanceToWaypoint;
     }
 
     private void HandleMovement(ActionBuffers actions)
@@ -375,7 +453,7 @@ public class MLAgent : Agent
     {
         if (!hasEatenGhost)
         {
-            AddReward(-0.5f);  // Negative reward for not eating a ghost within the activation time
+            AddReward(-0.01f);  // Negative reward for not eating a ghost within the activation time
         }
         canAttack = false;
         hasEatenGhost = false;
@@ -399,7 +477,7 @@ public class MLAgent : Agent
 
         if (other.gameObject.TryGetComponent<Goal>(out Goal goalC))
         {
-            AddReward(1.0f/goalObjects.Count());
+            AddReward(0.15f/(float)goalObjects.Count());
             canAttack = true;
             List<GhostBehaviour> ghostBehaviours = ghostObjects.Select(go => go.GetComponent<GhostBehaviour>()).ToList();
 
@@ -407,7 +485,7 @@ public class MLAgent : Agent
             {
                 ghostBehaviour.EnterFrightenedMode();
             }
-
+            countdownTimer = 10f;
             CancelInvoke("DeactivateAttack");
             Invoke("DeactivateAttack", 10f);
             goalC.gameObject.SetActive(false);
@@ -418,22 +496,20 @@ public class MLAgent : Agent
         }
         else if (other.gameObject.TryGetComponent<Wall>(out Wall wall))
         {
-            AddReward(-0.01f);
+            AddReward(-0.01f / (float)MaxStep);
         }
         else if (other.gameObject.TryGetComponent<GhostBehaviour>(out GhostBehaviour ghost))
         {
             if (canAttack)
             {
                 hasEatenGhost = true;
-                float attackReward = 1.0f;
 
-                AddReward(attackReward);
+                AddReward(0.3f/(float)numGhostsToActivate);
                 ghost.Die();
             }
             else
             {
-                AddReward(-1f);
-                Debug.Log("Ending episode due to ghost collision without canAttack.");
+                AddReward(-0.3f);
                 EndEpisode();
             }
 
@@ -447,15 +523,7 @@ public class MLAgent : Agent
         {
             float timeDiff = Time.time - lastPalletEatenTime;
 
-            // Base reward for eating a pellet
-            float baseReward = 0.5f / numPalletsToActivate;
-
-            // Time-based reward
-            float timeBasedReward = 1 - Mathf.Clamp01(timeDiff / 30);  // Reward decreases as time increases
-
-            float totalReward = baseReward + timeBasedReward;
-
-            AddReward(totalReward);
+            AddReward(0.3f/(float)numPalletsToActivate);
 
             lastPalletEatenTime = Time.time;
             other.gameObject.SetActive(false);
@@ -465,10 +533,20 @@ public class MLAgent : Agent
             // Check if all pellets are eaten
             if (pelletsEaten >= numPalletsToActivate)
             {
-                AddReward(1.0f);  // Give positive reward
-                Debug.Log("Ending episode because all pellets are eaten.");
+                AddReward(0.3f);  // Give positive reward
+                Debug.Log("Level Passed, Advancing Lesson.");               
+                lessonManager.AddSuccedLesson();                      
                 EndEpisode();     // Restart the episode
             }
+        }
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("EnemyZone"))
+        {
+            AddReward(-0.05f);  // Continuously give negative reward
         }
     }
 

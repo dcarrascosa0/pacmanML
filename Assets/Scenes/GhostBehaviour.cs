@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +12,7 @@ public class GhostBehaviour : MonoBehaviour
     public float frightenedTime = 10f; // Time ghosts remain frightened
 
     private NavMeshAgent navMeshAgent;
-    private GhostMode currentMode = GhostMode.Scatter;
+    public GhostMode currentMode = GhostMode.Scatter;
 
     private float modeTime = 0f;
     private float scatterTime = 10f; // Time ghosts spend scattering
@@ -24,7 +25,9 @@ public class GhostBehaviour : MonoBehaviour
     private Vector3 startPosition;
 
     private Vector3 relativeCenter;
+    public Vector3 scatterTarget;
 
+    private Bounds bounds;
 
 
 
@@ -46,6 +49,7 @@ public class GhostBehaviour : MonoBehaviour
 
     void Start()
     {
+        Physics.IgnoreLayerCollision(7, 7, true);
         navMeshAgent = GetComponent<NavMeshAgent>();
         SwitchMode(GhostMode.Scatter);
         modeTime = Time.time;
@@ -55,18 +59,38 @@ public class GhostBehaviour : MonoBehaviour
         AddWaypoint(relativeCenter + new Vector3(-113.0f, 10.5f, 16.7f));
 
         startPosition = transform.position;  // Store the starting position
+        CalculateBounds();
 
+    }
+
+    private void CalculateBounds()
+    {
+        float xMin = float.MaxValue;
+        float xMax = float.MinValue;
+        float zMin = float.MaxValue;
+        float zMax = float.MinValue;
+
+        foreach (Vector3 point in scatterWaypoints)
+        {
+            if (point.x < xMin) xMin = point.x;
+            if (point.x > xMax) xMax = point.x;
+            if (point.z < zMin) zMin = point.z;
+            if (point.z > zMax) zMax = point.z;
+        }
+
+        bounds = new Bounds(new Vector3((xMax + xMin) / 2, 10.5f, (zMax + zMin) / 2), new Vector3(xMax - xMin, 0, zMax - zMin));
     }
 
     void Update()
     {
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        // Check for NavMeshAgent reaching its destination
+        if (navMeshAgent.remainingDistance < 2.0f && !navMeshAgent.pathPending)
         {
             hasReachedDestination = true;
         }
         else
         {
-            hasReachedDestination = false; // Make sure to reset the flag
+            hasReachedDestination = false;
         }
 
         switch (currentMode)
@@ -81,7 +105,10 @@ public class GhostBehaviour : MonoBehaviour
                 }
                 break;
             case GhostMode.Frightened:
-                Frightened();
+                if (hasReachedDestination)
+                {
+                    Frightened();
+                }
                 break;
         }
 
@@ -155,44 +182,26 @@ public class GhostBehaviour : MonoBehaviour
 
     private void Scatter()
     {
-        if (hasReachedDestination)
-        {
-            Vector3 scatterTarget = scatterWaypoints[Random.Range(0, scatterWaypoints.Length)];
-            navMeshAgent.SetDestination(scatterTarget);
-        }
+        
+        scatterTarget = scatterWaypoints[Random.Range(0, scatterWaypoints.Length)];
+        navMeshAgent.SetDestination(scatterTarget);
+        
     }
 
     private void Frightened()
     {
-        Vector3 farthestWaypoint = Vector3.zero;
-        float maxDistance = float.MinValue;
+        
+        scatterTarget = GetRandomPointWithinBounds();
+        navMeshAgent.SetDestination(scatterTarget);
+        
+    }
 
-        foreach (Vector3 waypoint in scatterWaypoints)
-        {
-            float distance = Vector3.Distance(waypoint, pacman.transform.position);
-            float distGhostToWaypoint = Vector3.Distance(transform.position, waypoint);
-            float distPacmanToWaypoint = Vector3.Distance(pacman.transform.position, waypoint);
+    private Vector3 GetRandomPointWithinBounds()
+    {
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float z = Random.Range(bounds.min.z, bounds.max.z);
 
-            if (distance > maxDistance && distPacmanToWaypoint > distGhostToWaypoint)
-            {
-                maxDistance = distance;
-                farthestWaypoint = waypoint;
-            }
-        }
-
-        if (pacman.IsMoving())
-        {
-            // Calculate opposite direction
-            Vector3 oppositeDirection = (transform.position - pacman.transform.position).normalized;
-            Vector3 oppositeTarget = transform.position + oppositeDirection * 5f; // You can adjust the multiplier
-
-            oppositeTarget = ClampInRelativeSpace(oppositeTarget);
-            navMeshAgent.SetDestination(oppositeTarget);
-        }
-        else
-        {
-            navMeshAgent.SetDestination(farthestWaypoint);
-        }
+        return new Vector3(x, 10.5f, z);
     }
 
 
@@ -246,6 +255,7 @@ public class GhostBehaviour : MonoBehaviour
             renderer.material = originalMaterial;
         }
         hasReachedDestination = false;
+        Scatter();
     }
 
 

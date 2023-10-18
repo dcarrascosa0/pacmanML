@@ -19,82 +19,18 @@ behaviors:
         use_recurrent: false
         sequence_length: 64
         memory_size: 256
+        batch_size: 1  # Set the batch size to 1 here
     reward_signals:
       extrinsic:
         gamma: 0.99
         strength: 1.0
     keep_checkpoints: 2
-    max_steps: 6000000
+    max_steps: 150000000
     time_horizon: 64
     summary_freq: 100000
     threaded: false
 
-environment_parameters:
-  pallet_percentage:
-    curriculum:
-      - name: Lesson1
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.1  # 300,000/6,000,000
-        value: 0.1
-      - name: Lesson2
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.2  # 600,000/6,000,000
-        value: 0.2
-      - name: Lesson3
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.4  # 1,350,000/6,000,000
-        value: 0.4
-      - name: Lesson4
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.5  # 2,400,000/6,000,000
-        value: 0.6
-      - name: Lesson5
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.6  # 3,750,000/6,000,000
-        value: 0.8
-      - name: Lesson6
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.8  # 5,400,000/6,000,000
-        value: 1.0
-  num_ghosts:
-    curriculum:
-      - name: OneGhost
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.2  # 300,000/6,000,000
-        value: 1
-      - name: TwoGhosts
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.4  # 600,000/6,000,000
-        value: 2
-      - name: ThreeGhosts
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.6  # 1,350,000/6,000,000
-        value: 3
-      - name: FourGhosts
-        completion_criteria:
-          measure: progress
-          behavior: MLAgent
-          threshold: 0.8  # 2,400,000/6,000,000
-        value: 4
-
+  
 
 
 
