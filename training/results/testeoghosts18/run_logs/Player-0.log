@@ -1,0 +1,881 @@
+Mono path[0] = 'C:/Users/David/Documents/Unity/pacmanML/Build/My project_Data/Managed'
+Mono config path = 'C:/Users/David/Documents/Unity/pacmanML/Build/MonoBleedingEdge/etc'
+Initialize engine version: 2021.3.22f1 (b6c551784ba3)
+[Subsystems] Discovering subsystems at path C:/Users/David/Documents/Unity/pacmanML/Build/My project_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3080 Ti (ID=0x2208)
+    Vendor:   NVIDIA
+    VRAM:     12100 MB
+    Driver:   31.0.15.3734
+Begin MonoManager ReloadAssembly
+- Completed reload, in  0.112 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.853000 ms
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Current Pallet Percentage: 1
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to ghost collision without canAttack.
+Ending episode due to max steps reached or 30 seconds without eating a pallet.
+Unable to save timers to file C:/Users/David/Documents/Unity/pacmanML/Build/My project_Data\ML-Agents\Timers\Projecte TDR_timers.json
+Setting up 8 worker threads for Enlighten.
+Memory Statistics:
+[ALLOC_TEMP_TLS] TLS Allocator
+  StackAllocators : 
+    [ALLOC_TEMP_MAIN]
+      Peak usage frame count: [128.0 KB-256.0 KB]: 8759 frames, [2.0 MB-4.0 MB]: 1 frames
+      Initial Block Size 4.0 MB
+      Current Block Size 4.0 MB
+      Peak Allocated Bytes 2.1 MB
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.AsyncRead]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 222 B
+      Overflow Count 0
+    [ALLOC_TEMP_Loading.PreloadManager]
+      Initial Block Size 256.0 KB
+      Current Block Size 432.0 KB
+      Peak Allocated Bytes 430.0 KB
+      Overflow Count 9
+    [ALLOC_TEMP_Background Job.Worker 8]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 6]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 0]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 10]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 9]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 5]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 14]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 6]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 4]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 14]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 3]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 13]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 12]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_EnlightenWorker] x 8
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 15]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 1]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 2]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 7]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_UnityGfxDeviceWorker]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 14.1 KB
+      Overflow Count 0
+    [ALLOC_TEMP_AssetGarbageCollectorHelper] x 15
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 0 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 5]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 9]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 13]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 8]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 7]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 1]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 2]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 3]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 11]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 10]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 0]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 11]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Job.Worker 12]
+      Initial Block Size 256.0 KB
+      Current Block Size 256.0 KB
+      Peak Allocated Bytes 24.0 KB
+      Overflow Count 0
+    [ALLOC_TEMP_Background Job.Worker 4]
+      Initial Block Size 32.0 KB
+      Current Block Size 32.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+    [ALLOC_TEMP_BatchDeleteObjects]
+      Initial Block Size 64.0 KB
+      Current Block Size 64.0 KB
+      Peak Allocated Bytes 54 B
+      Overflow Count 0
+[ALLOC_DEFAULT] Dual Thread Allocator
+  Peak main deferred allocation count 62
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 3.9 MB
+      Failed Allocations. Bucket layout:
+        16B: 7 Subsections = 7168 buckets. Failed count: 483
+        32B: 19 Subsections = 9728 buckets. Failed count: 0
+        48B: 36 Subsections = 12288 buckets. Failed count: 3114339
+        64B: 54 Subsections = 13824 buckets. Failed count: 2264328
+        80B: 43 Subsections = 8806 buckets. Failed count: 72346
+        96B: 4 Subsections = 682 buckets. Failed count: 0
+        112B: 3 Subsections = 438 buckets. Failed count: 0
+        128B: 90 Subsections = 11520 buckets. Failed count: 0
+    [ALLOC_DEFAULT_MAIN]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 3030 frames, [32.0 MB-64.0 MB]: 5730 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 5
+      Peak Allocated memory 54.1 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_DEFAULT_THREAD]
+      Peak usage frame count: [16.0 MB-32.0 MB]: 8760 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 22.3 MB
+      Peak Large allocation bytes 16.0 MB
+[ALLOC_TEMP_JOB_1_FRAME]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_2_FRAMES]
+  Initial Block Size 2.0 MB
+  Used Block Count 1
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_4_FRAMES (JobTemp)]
+  Initial Block Size 2.0 MB
+  Used Block Count 2
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_TEMP_JOB_ASYNC (Background)]
+  Initial Block Size 1.0 MB
+  Used Block Count 4
+  Overflow Count (too large) 0
+  Overflow Count (full) 0
+[ALLOC_GFX] Dual Thread Allocator
+  Peak main deferred allocation count 1
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 3.9 MB
+      Failed Allocations. Bucket layout:
+        16B: 7 Subsections = 7168 buckets. Failed count: 483
+        32B: 19 Subsections = 9728 buckets. Failed count: 0
+        48B: 36 Subsections = 12288 buckets. Failed count: 3114339
+        64B: 54 Subsections = 13824 buckets. Failed count: 2264328
+        80B: 43 Subsections = 8806 buckets. Failed count: 72346
+        96B: 4 Subsections = 682 buckets. Failed count: 0
+        112B: 3 Subsections = 438 buckets. Failed count: 0
+        128B: 90 Subsections = 11520 buckets. Failed count: 0
+    [ALLOC_GFX_MAIN]
+      Peak usage frame count: [32.0 KB-64.0 KB]: 8759 frames, [2.0 MB-4.0 MB]: 1 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 2.7 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_GFX_THREAD]
+      Peak usage frame count: [2.0 MB-4.0 MB]: 1158 frames, [4.0 MB-8.0 MB]: 7602 frames
+      Requested Block Size 16.0 MB
+      Peak Block count 1
+      Peak Allocated memory 4.1 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_CACHEOBJECTS] Dual Thread Allocator
+  Peak main deferred allocation count 2
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 3.9 MB
+      Failed Allocations. Bucket layout:
+        16B: 7 Subsections = 7168 buckets. Failed count: 483
+        32B: 19 Subsections = 9728 buckets. Failed count: 0
+        48B: 36 Subsections = 12288 buckets. Failed count: 3114339
+        64B: 54 Subsections = 13824 buckets. Failed count: 2264328
+        80B: 43 Subsections = 8806 buckets. Failed count: 72346
+        96B: 4 Subsections = 682 buckets. Failed count: 0
+        112B: 3 Subsections = 438 buckets. Failed count: 0
+        128B: 90 Subsections = 11520 buckets. Failed count: 0
+    [ALLOC_CACHEOBJECTS_MAIN]
+      Peak usage frame count: [1.0 MB-2.0 MB]: 8760 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 1
+      Peak Allocated memory 1.8 MB
+      Peak Large allocation bytes 0 B
+    [ALLOC_CACHEOBJECTS_THREAD]
+      Peak usage frame count: [4.0 MB-8.0 MB]: 8759 frames, [16.0 MB-32.0 MB]: 1 frames
+      Requested Block Size 4.0 MB
+      Peak Block count 8
+      Peak Allocated memory 23.5 MB
+      Peak Large allocation bytes 0 B
+[ALLOC_TYPETREE] Dual Thread Allocator
+  Peak main deferred allocation count 0
+    [ALLOC_BUCKET]
+      Large Block size 4.0 MB
+      Used Block count 1
+      Peak Allocated bytes 3.9 MB
+      Failed Allocations. Bucket layout:
+        16B: 7 Subsections = 7168 buckets. Failed count: 483
+        32B: 19 Subsections = 9728 buckets. Failed count: 0
+        48B: 36 Subsections = 12288 buckets. Failed count: 3114339
+        64B: 54 Subsections = 13824 buckets. Failed count: 2264328
+        80B: 43 Subsections = 8806 buckets. Failed count: 72346
+        96B: 4 Subsections = 682 buckets. Failed count: 0
+        112B: 3 Subsections = 438 buckets. Failed count: 0
+        128B: 90 Subsections = 11520 buckets. Failed count: 0
+    [ALLOC_TYPETREE_MAIN]
+      Peak usage frame count: [0-1.0 KB]: 8760 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 1
+      Peak Allocated memory 1.1 KB
+      Peak Large allocation bytes 0 B
+    [ALLOC_TYPETREE_THREAD]
+      Peak usage frame count: [0-1.0 KB]: 8760 frames
+      Requested Block Size 2.0 MB
+      Peak Block count 0
+      Peak Allocated memory 0 B
+      Peak Large allocation bytes 0 B

@@ -1,0 +1,35 @@
+{
+    "pallet_percentage": {
+        "lesson_num": 2
+    },
+    "num_ghosts": {
+        "lesson_num": 2
+    },
+    "MLAgent": {
+        "checkpoints": [
+            {
+                "steps": 68881,
+                "file_path": "results\\testeoghosts4\\MLAgent\\MLAgent-68881.onnx",
+                "reward": 65.21628093719482,
+                "creation_time": 1696073399.8565316,
+                "auxillary_file_paths": [
+                    "results\\testeoghosts4\\MLAgent\\MLAgent-68881.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 68881,
+            "file_path": "results\\testeoghosts4\\MLAgent.onnx",
+            "reward": 65.21628093719482,
+            "creation_time": 1696073399.8565316,
+            "auxillary_file_paths": [
+                "results\\testeoghosts4\\MLAgent\\MLAgent-68881.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.30.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
